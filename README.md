@@ -18,8 +18,7 @@ Ein Arduino-basiertes Geschicklichkeitsspiel für 2 Spieler mit LED-Matrix-Anzei
 - **12x MAX7219 LED-Matrix Module** - Spielstand und Animationen
 - **6x Servo-Motoren** - Kugelsortierung
 - **10x Lichtschranken (LM393 + Laser)** - Treffererkennung
-- **Nema 17 Stepper** - Drehscheiben
-- **28BYJ-48 Stepper** - Fänger-Mechanismus
+- **3 28BYJ-48 Stepper Motoren** - 2 Drehscheiben & Fänger-Mechanismus
 
 ### Sensoren & Eingabe
 - **3x Taster** - Menü, Auswahl, Weiter
@@ -31,19 +30,16 @@ Ein Arduino-basiertes Geschicklichkeitsspiel für 2 Spieler mit LED-Matrix-Anzei
 - **Drehscheiben** - Dynamische Hindernisse
 - **Jackpot-System** - Kugeln sammeln und freigeben
 - **6-Fach Sortierung** - Automatische Punktevergabe
+- **LED-Strip, der später per IR-LED gesteuert werden soll (TBD)
 
 ## 📁 Projekt-Struktur
 
 ```
 /src/
-├── schnipp.ino           # Hauptsketch
+├── main.ino              # Hauptsketch
 ├── Config.h              # Pin-Definitionen & Konstanten
-├── Spielmanager.h/.cpp   # Kern-Spiellogik
-├── Matrixanzeige.h/.cpp  # LED-Matrix Steuerung
-├── Lichtschranken.h/.cpp # Sensor-System
-├── Kugelsortierung.h/.cpp # Servo-Steuerung  
-├── Jackpotsystem.h/.cpp  # Jackpot-Mechanismus
-└── Tastensteuerung.h/.cpp # Menü & Eingabe
+├── MatrixDisplay.h/.cpp  # LED-Matrix Steuerung
+└── TastenSteuerung.h/.cpp # Menü & Eingabe
 ```
 
 ## 🚀 Installation & Setup
@@ -72,15 +68,14 @@ Siehe `Config.h` für vollständige Pin-Belegung:
 1. Arduino IDE öffnen
 2. Board: "Arduino Mega 2560" auswählen
 3. Alle `.h` und `.cpp` Dateien in Projektordner
-4. `schnipp.ino` öffnen und hochladen
+4. `main.ino` öffnen und hochladen
 
 ## 🎯 Spielregeln
 
 ### Grundlagen
 - **2 Spieler** abwechselnd
-- **10 Kugeln** pro Spieler
-- **Ziel: 30 Punkte** erreichen
-- **Maximal 3 Versuche** wenn Kugel zurückrollt
+- **3 x 10 Kugeln** für beide Spieler zusammen (d.h. 5 für jeden in jeder Phase)
+- **Ziel: Am Ende am meisten Punkte haben oder vorher 30 Punkte** erreichen
 
 ### Punktevergabe
 | Ziel | Phase 1 | Phase 2 | Phase 3 |
@@ -103,7 +98,7 @@ Siehe `Config.h` für vollständige Pin-Belegung:
 
 ### Hauptmenü
 1. **Neues Spiel** - Spiel neu starten
-2. **Spielstand** - Punkte manuell ändern
+2. **Korrekturen** - Punkte manuell ändern
 3. **Tests** - Hardware-Funktionstest
 4. **Sound** - Lautstärke einstellen
 
@@ -138,30 +133,6 @@ Neues Spiel gestartet
 Spieler 1: +2 = 2
 JACKPOT AUSGELÖST! 5 Kugeln = 5 Punkte
 ```
-
-## 📊 Status & TODOs
-
-### ✅ Implementiert
-- Grundlegende Spiellogik
-- LED-Matrix mit Animationen
-- Lichtschranken-System
-- Servo-Steuerung
-- Jackpot-Mechanismus
-- Menü-System
-
-### 🔄 In Arbeit
-- Stepper-Motor Integration
-- Sound-System
-- LED-Strip Steuerung
-- Erweiterte Tests
-
-### 📝 Geplant
-- Statistik-Speicherung
-- Kalibrierungs-Menü
-- Tournament-Modus
-- Remote-Steuerung
-
-## 🤝 Beitragen
 
 Das Projekt ist modular aufgebaut - neue Features können einfach als separate Klassen hinzugefügt werden. 
 
